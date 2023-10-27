@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Schema, model } from 'mongoose';
+import User from './models/user.js';
+import useparams from 'express';
+import Product from './models/product.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -21,33 +23,6 @@ const connectMongoDB=async()=>{try{
 };
 connectMongoDB();
 
-const userSchema = new Schema({
-
-    name:{
-        type:String,
-        default:" _" 
-    },
-    email:{
-        type:String,
-        unique:true,
-        required:true,
-    },
-    password:{
-        type:String,
-        required:true,
-    },
-    mobile:{
-        type:String,
-        unique:true,
-        required:true,
-    },
-    address:{
-        type:String
-    },
-    
-});
-
-const User = model('User',userSchema);
 
 
 app.post('/signup' , async(req,res)=>{
@@ -135,7 +110,128 @@ app.get('/user',async(req,res)=>{
 
 })
 
+// product add karne
+app.post('/products',async(req,res)=>{
+    
+    try{
+    const{name,description,price,image,brand,category}=req.body;
 
+    const newProduct = new Product({
+        name:name,
+        description:description,
+        price:price,
+        image:image,
+        brand:brand,
+        category:category
+    });
+
+    const savedProduct= await newProduct.save();
+
+    res.send({
+        success:true,
+        data:savedProduct,
+        message:"product aaded successfully"
+    })
+}catch(e){
+    res.send({
+        success:false,
+        message:e.message
+    })
+}
+
+
+})
+// product fetch
+app.get('/products',async(req,res)=>{
+
+    try{
+     const totalProduct = await Product.find();
+
+    res.send({
+        success:true,
+        data:totalProduct,
+        message:"total data is fetched"
+    })
+    }catch(e){
+        res.send({
+            success:true,
+            message:e.message
+        })
+    }
+    
+
+})
+
+app.get('/product/:id',async(req,res)=>{
+    try{
+
+        const {id}=req.params;
+        const response = await Product.findOne({_id : id});
+    
+        res.send({
+            success:true,
+            data:response,
+            message:`data is found by ${id}`
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+});
+
+app.put('/products/:id',async(req,res)=>{
+    try{
+
+        const{id}=req.params
+        const{name ,description,price,image,brand,category}=req.body;
+    
+        await Product.updateOne({_id:id},{$set:{
+            name:name,
+            description:description,
+            price:price,
+            image:image,
+            brand:brand,
+            category:category
+        }});
+    
+        const updateFind = await Product.findOne({_id:id});
+    
+        res.send({
+            success:true,
+            data:updateFind,
+            message:"data is updated"
+        })
+    }catch(e){
+        res.send({
+            success:true,
+            message:e.message
+        })
+    }
+    
+});
+
+// search query
+app.get('/products/search',async(req,res)=>{
+    try{
+
+        const{q}=req.query;
+    
+        const findProducts = await Product.find({name: {$regex:q ,$options:"i"}});
+    
+        res.send({
+            success:true,
+            data:findProducts,
+            message:"products is fetched "
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+})
 app.listen(PORT,()=>{
     console.log(" server is running on port 5000")
 }) 

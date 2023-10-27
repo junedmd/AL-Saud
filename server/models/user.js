@@ -1,30 +1,32 @@
 
-// import { Schema, model } from 'mongoose';
-// const userSchema = new Schema({
+import { Schema, model } from 'mongoose';
+const userSchema = new Schema({
 
-//     name:{
-//         type:String,
-//         default:" _" 
-//     },
-//     email:{
-//         type:String,
-//         unique:true,
-//         required:true,
-//     },
-//     password:{
-//         type:String,
-//         required:true,
-//     },
-//     mobile:{
-//         type:String,
-//         unique:true,
-//         required:true,
-//     },
-//     address:{
-//         type:String
-//     },
+    name:{
+        type:String,
+        default:" _" 
+    },
+    email:{
+        type:String,
+        unique:true,
+        required:true,
+    },
+    password:{
+        type:String,
+        required:true,
+    },
+    mobile:{
+        type:String,
+        unique:true,
+        required:true,
+    },
+    address:{
+        type:String
+    },
     
-// });
+},{
+    timestamps:true,
+});
 
-// const User = model('User',userSchema);
-// export default User ;
+const User = model('User',userSchema);
+export default User ;
