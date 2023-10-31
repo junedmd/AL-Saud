@@ -1,16 +1,18 @@
 .form-container{
-    height: 500px;
+    margin-top: 50px;
+    height: 430px;
     width: 350px;
-    padding: 5px 20px;
-    margin: 20px auto;
+    padding: 15px 20px;
+    margin: 40px auto;
     border-radius: 15px;
-    background-color: cadetblue;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .inputfields{
     margin-bottom: 20px;
     font-size: 20px;
     padding: 5px;
+    width: 300px;
     border-radius: 10px;
     display: block;
     margin: 0 auto;
@@ -19,13 +21,13 @@
     font-size: 25px;
     color: aliceblue;
 }
-.text{
+.text-center{
     text-align: center;
-    color: aliceblue;
+    color: rgb(29, 30, 30);
 }
 .btn{
     font-size: 20px;
-    width: 150px;
+    width: 110px;
     background-color: blue;
     color: aliceblue;
   
@@ -36,4 +38,9 @@
     display: block;
     margin: 10px auto;
     cursor: pointer;
+}
+.sign-link{
+    text-decoration: none;
+   margin-left: 100px;
+   font-size: 20px;
 }

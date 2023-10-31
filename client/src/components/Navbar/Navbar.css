@@ -1,0 +1,28 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.nav-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgb(92, 95, 97);
+    padding: 18px;
+    color: aliceblue;
+    font-size: 25px;
+}
+.sep-link{
+    display: flex;
+    gap: 30px;
+}
+.Links-q{
+    text-decoration: none;
+    color: aliceblue;
+}
+.img-log{
+    height:50px;
+
+}
+.logo{
+    cursor: pointer;
+}

@@ -108,6 +108,24 @@ app.get('/user',async(req,res)=>{
             )
         }
 
+});
+
+//delete user api
+app.delete('/user/:id', async(req,res)=>{
+    try{
+        const {id}= req.params;
+        await User.deleteOne({_id:id});
+
+        res.send({
+            success:true,
+            message:`${id} user is deleted`
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
 })
 
 // product add karne

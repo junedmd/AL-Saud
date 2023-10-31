@@ -1,8 +1,19 @@
 .login-container{
-    height: 500px;
-    width: 400px;
-    border: 1px solid black;
+    height: 300px;
+    width: 350px;
+    padding: 25px;
+    /* border: 1px solid black; */
     border-radius: 15px;
-    background-color: cadetblue;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+    margin: 30px auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.inputfields{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.sign-linka{
+    text-decoration: none;
+   margin-left: 140px;
+   font-size: 20px;
 }
