@@ -4,7 +4,7 @@ import User from './models/user.js';
 import useparams from 'express';
 import Product from './models/product.js';
 import dotenv from 'dotenv';
-
+import Order from './models/order.js';
 dotenv.config();
 const app =express()
 app.use(express.json());
@@ -213,7 +213,7 @@ app.put('/products/:id',async(req,res)=>{
 });
 
 // search query
-app.get('/products/search',async(req,res)=>{
+app.get('/productsa                                                                                           /search',async(req,res)=>{
     try{
 
         const{q}=req.query;
@@ -231,7 +231,142 @@ app.get('/products/search',async(req,res)=>{
             message:e.message
         })
     }
-})
+});
+
+// adding product
+
+app.post('/order',async(req,res)=>{
+    try{
+        const{user,product,quantity,shippingAddress,deliveryCharges}=req.body;
+    
+        const newOrder = new Order({
+            user:user,
+            product:product,
+            quantity:quantity,
+            shippingAddress:shippingAddress,
+            deliveryCharges:deliveryCharges
+    
+        });
+    
+        const savedOrder= await newOrder.save();
+    
+        res.send({
+            success:true,
+            data:savedOrder,
+            message:"order successfully added"
+        })
+
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+
+});
+// id se order fetch
+app.get('/order/:id',async(req,res)=>{
+    try{
+
+
+        const {id}=req.params;
+
+        const order = await Order.findOne({_id:id}).populate('user product');
+
+        order.user.password= undefined;
+        order.user.address=undefined;
+        order.user.email=undefined;
+
+        res.send({
+            success:true,
+            data:order,
+            message:"data is fetched by id"
+        })
+    }catch(e){
+        res.send({
+
+            success:false,
+            message:e.message
+        });
+    }
+
+});
+
+// get order user by id
+
+app.get('/order/user/:id' ,async(req,res)=>{
+    try{
+
+        const{id}=req.params;
+    
+        const orders = await Order.find({user:id}).populate(" user product");
+    
+        res.send({
+            success:true,
+            data:orders,
+            message:` order fetch by id ${id}`
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+
+});
+
+// patch se oreder upadete karna
+app.patch('/order/status/:id', async(req,res)=>{
+        try{
+
+            const {id}=req.params;
+            const {status}=req.body;
+        
+          await Order.updateOne({_id:id} ,{$set:{status:status}});
+        
+          const order = await Order.findOne({_id:id}).populate('user product');
+        
+                order.user.password= undefined;
+                order.user.address=undefined;
+                order.user.email=undefined;
+          res.send({
+            success:true,
+            data:order,
+            message:" status is updated"
+          });
+        }catch(e){
+            res.send({
+                success:true,
+                message:e.message
+            })
+        }
+
+});
+//get  total order lena
+app.get('/orders',async(req,res)=>{
+
+    try{
+
+        const orders = await Order.find().populate('user product');
+    
+        orders.forEach((order)=>{
+            order.user.password=undefined;
+        });
+    
+        res.send({
+            success:true,
+            data:orders,
+            message:"total order fetch hogaya"
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+
+
+});
 app.listen(PORT,()=>{
     console.log(" server is running on port 5000")
 }) 

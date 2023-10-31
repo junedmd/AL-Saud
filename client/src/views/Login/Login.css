@@ -1,0 +1,8 @@
+.login-container{
+    height: 500px;
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: cadetblue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+}

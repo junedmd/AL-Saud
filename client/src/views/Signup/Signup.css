@@ -1,0 +1,39 @@
+.form-container{
+    height: 500px;
+    width: 350px;
+    padding: 5px 20px;
+    margin: 20px auto;
+    border-radius: 15px;
+    background-color: cadetblue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+}
+.inputfields{
+    margin-bottom: 20px;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+.label-field{
+    font-size: 25px;
+    color: aliceblue;
+}
+.text{
+    text-align: center;
+    color: aliceblue;
+}
+.btn{
+    font-size: 20px;
+    width: 150px;
+    background-color: blue;
+    color: aliceblue;
+  
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    display: block;
+    margin: 10px auto;
+    cursor: pointer;
+}
