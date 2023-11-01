@@ -24,7 +24,14 @@ export default function Navbar(){
             <div><Link to="/order" className="Links-q">Orders</Link> </div>
             </div>
             <div>
-               user {user?.name}
+               
+
+               {
+                user?.name ? (<span onClick={()=>{
+                    localStorage.removeItem("user");
+                    window.location.href ="/"
+                }}>  {user?.name}  logut</span>) : null
+               }
             </div>
 
         </div>

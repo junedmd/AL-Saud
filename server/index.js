@@ -229,6 +229,24 @@ app.put('/products/:id',async(req,res)=>{
     }
     
 });
+// product delete karna
+
+app.delete('/product/:id', async(req,res)=>{
+    try{
+        const {id}= req.params;
+        await Product.deleteOne({_id:id});
+
+        res.send({
+            success:true,
+            message:`${id} product is deleted`
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+})
 
 // search query
 app.get('/productsa                                                                                           /search',async(req,res)=>{
