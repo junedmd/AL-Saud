@@ -1,0 +1,18 @@
+.my-roder {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+.img-prod{
+    height: 200px;
+}
+.main-box{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

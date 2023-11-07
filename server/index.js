@@ -300,7 +300,7 @@ app.post('/order',async(req,res)=>{
     }
 
 });
-// id se order fetch
+// get order by id fetch karna
 app.get('/order/:id',async(req,res)=>{
     try{
 
@@ -328,15 +328,17 @@ app.get('/order/:id',async(req,res)=>{
 
 });
 
-// get order user by id
+// get order of user by id
 
-app.get('/order/user/:id' ,async(req,res)=>{
+app.get('/orders/user/:id' ,async(req,res)=>{
     try{
 
         const{id}=req.params;
     
-        const orders = await Order.find({user:id}).populate(" user product");
-    
+        const orders = await Order.find({user:id}).populate('user product');
+        // orders.forEach((Order)=>{
+       
+        // })
         res.send({
             success:true,
             data:orders,
@@ -403,6 +405,25 @@ app.get('/orders',async(req,res)=>{
 
 
 });
+
+// delete order api 
+
+app.delete('/order/:id', async(req,res)=>{
+    try{
+        const {id}= req.params;
+        await Order.deleteOne({_id:id});
+
+        res.send({
+            success:true,
+            message:`${id} product is deleted`
+        })
+    }catch(e){
+        res.send({
+            success:false,
+            message:e.message
+        })
+    }
+})
 app.listen(PORT,()=>{
     console.log(" server is running on port 5000")
 }) 

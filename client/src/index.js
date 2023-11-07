@@ -6,6 +6,7 @@ import Signup from "./views/Signup/Signup";
 import Login from './views/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import Order from './views/Order/Order';
+import Buy from "./views/Buypage/Buy"
 
 const router =createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router =createBrowserRouter([
    {
       path:'/order',
       element:<Order/>
+   },
+   {
+      path:'/buy/:id',
+      element:<Buy/>
    }
     
     ])

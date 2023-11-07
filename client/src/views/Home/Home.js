@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
+import Product from "../../components/Product/Product";
 export default function Home() {
     const [product, setProduct] = useState([]);
 
@@ -23,25 +24,25 @@ export default function Home() {
     return (
         <div>
             <Navbar />
-            <h1> Home Page</h1>
+          
 
             <div className="cards-container">
                 {
                     product?.map((product ,index) => {
-                        const { name, description, price, image, brand, category } = product;
+                        const { _id,name, description, price, image, brand, category } = product;
                         return (
-                            <div className="product-card" key={index}>
-                                <img src={image} className="img-product" />
-                                <h2>{name}</h2>
-                                <p className="text3">{description}</p>
-                                <p className="text4">₹ {price}</p>
-                                <p className="text5"> {brand}</p>
-                                <p className="text6"> {category}</p>
-
-                                <button className="btn-product">
-                                    Buy now
-                                </button>
-                            </div>
+                            <Product 
+                            key={index}
+                            name={name}
+                            image={image}
+                            price={price}
+                            description={description}
+                            id={_id}
+                            brand={brand}
+                            category={category}
+                            
+                            
+                            />
                         )
 
 
